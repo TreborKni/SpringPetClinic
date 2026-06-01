@@ -1,31 +1,32 @@
 pipeline{
     
     agent any
-    tools {maven "M3"}
+    tools {maven 'M3'}
     stages {
-        stage("checkout"){
+        stage('checkout'){
             steps{
-                git branch "main" , url: "https://github.com/TreborKni/SpringPetClinic.git"
+                git branch 'main' , url: 'https://github.com/TreborKni/SpringPetClinic.git'
             }
         }
-        stage("build"){
+        stage('build'){
             steps{
-                sh "mvn compile"
+                sh 'mvn compile'
             }
         }
-        stage("test"){
+        stage('test'){
             steps{
-                sh "mvn test"
+                sh 'mvn test'
             }
         }
-        stage("package"){
+        stage('package'){
             steps{
-                sh "mvn package"
+                sh 'mvn package'
             }
         }
-        stage("deploy"){
-            
-            sh "java -jar /home/coder/.jenkins/workspace/petclinicDeclarativePipeline/target/*.jar"
+        stage('deploy'){
+            steps {
+                sh 'java -jar /home/coder/.jenkins/workspace/petclinicDeclarativePipeline/target/*.jar'
+            }
         }
     }
 }
